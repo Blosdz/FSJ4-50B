@@ -6,111 +6,85 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
     <style>
-      /* ELIMINAR BARRAS EN TODOS LOS DISPOSITIVOS */
+      /* Ocultar scrollbar pero permitir scroll horizontal en móvil */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
 
-      /* 1. Para móvil (≤ 767px) - mantener overflow original */
+      /* Móvil (< 768px): scroll horizontal, items compactos */
       @media (max-width: 767px) {
-        /* No hacemos nada, mantiene overflow-hidden del HTML */
-      }
-
-      /* 2. Para tablet/desktop pequeño (768px - 1023px) */
-      @media (min-width: 768px) and (max-width: 1023px) {
-        html body nav {
-          height: 78px !important;
-          overflow: visible !important;
-          overflow-x: clip !important;
-        }
-
-        /* Asegurar que no haya scroll en contenedores hijos */
-        .container-nav-ul,
-        .svgicon {
-          overflow: visible !important;
-          max-height: none !important;
-        }
-
-        .svgicon svg {
-          height: 34px !important;
-        }
-
-        .svgicon a {
-          font-size: 0.75rem !important;
-        }
-
-        .liW > div {
-          height: 38px !important;
-        }
-      }
-
-      /* 3. Para desktop grande (≥ 1024px) */
-      @media (min-width: 1024px) {
-        html body nav {
-          height: 82px !important;
-          overflow: visible !important;
-          overflow-x: clip !important;
-        }
-
-        .svgicon svg {
-          height: 36px !important;
-        }
-
-        .svgicon a {
-          font-size: 0.8rem !important;
-        }
-
-        .liW > div {
-          height: 40px !important;
-        }
-      }
-
-      /* 4. Estilos COMUNES para tablet y desktop (≥ 768px) */
-      @media (min-width: 768px) {
-        /* Forzar eliminación de overflow en todos los niveles */
         nav {
-          overflow: visible !important;
+          overflow: visible;
         }
 
-        .container-nav-ul,
-        .svgicon {
-          overflow: visible !important;
-          max-height: none !important;
-          height: 100% !important;
-        }
-
-        .liW {
-          padding-top: 6px !important;
-          padding-bottom: 6px !important;
-          overflow: visible !important;
-        }
-
-        .svgicon,
         .container-nav-ul {
-          display: flex !important;
-          align-items: center !important;
+          overflow-x: auto;
+          flex-wrap: nowrap;
+        }
+
+        .menu-item {
+          min-width: 80px;
+          max-width: 90px;
+          padding: 8px 4px;
+        }
+
+        .menu-item svg {
+          height: 28px;
+          width: auto;
+        }
+      }
+
+      /* Tablet (768px - 1023px) */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .menu-item {
+          min-width: 100px;
+          max-width: 140px;
+        }
+
+        .menu-item svg {
+          height: 32px;
+          width: auto;
+        }
+      }
+
+      /* Desktop (>= 1024px) */
+      @media (min-width: 1024px) {
+        .menu-item {
+          min-width: 120px;
+          max-width: 160px;
+        }
+
+        .menu-item svg {
+          height: 36px;
+          width: auto;
         }
       }
     </style>
   </head>
 
-  <body>
-    <nav class="h-[92px] overflow-hidden">
-      <div class="svgicon flex justify-center">
+  <body class="m-0 p-0">
+    <nav class="w-full">
+      <div class="flex justify-center w-full">
         <ul
-          class="flex container-nav-ul container-T text-sm w-full justify-start md:justify-center gap-2 overflow-x-auto px-2 scrollbar-hide"
+          class="container-nav-ul flex w-full justify-start md:justify-center gap-1 sm:gap-2 px-2 scrollbar-hide"
           style="color: #4c4c4c"
         >
-          <li>
+          <li class="shrink-0">
             <a
               href="https://www.ds3comunicaciones.com/ubiquiti/unifi/precios_powerbeam.html"
               target="_blank"
-              class="menu-item flex flex-col items-center hover:bg-gray-100 p-3 rounded-md cursor-pointer ease duration-200 w-24 md:w-32 shrink-0"
+              class="menu-item flex flex-col items-center hover:bg-gray-100 rounded-md cursor-pointer ease duration-200"
             >
-              <div class="h-12 flex items-center justify-center">
+              <div class="flex items-center justify-center">
                 <svg
                   width="100"
                   height="100"
                   viewBox="0 0 100 100"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="w-7 h-auto md:w-auto md:h-auto"
                 >
                   <rect
                     x="35"
@@ -132,16 +106,19 @@
                 </svg>
               </div>
 
-              <span class="text-xs md:text-sm">Cable</span>
+              <span
+                class="text-[10px] sm:text-xs md:text-sm leading-tight text-center break-words w-full"
+                >Cable</span
+              >
             </a>
           </li>
-          <li>
+          <li class="shrink-0">
             <a
               href="https://www.ds3comunicaciones.com/ubiquiti/unifi/precios_powerbeam.html"
               target="_blank"
-              class="menu-item flex flex-col items-center hover:bg-gray-100 p-3 rounded-md cursor-pointer ease duration-200 w-24 md:w-32 shrink-0"
+              class="menu-item flex flex-col items-center hover:bg-gray-100 rounded-md cursor-pointer ease duration-200"
             >
-              <div class="h-12 flex items-center justify-center">
+              <div class="flex items-center justify-center">
                 <svg
                   width="100"
                   height="100"
@@ -174,17 +151,20 @@
                   <rect x="48" y="10" width="4" height="15" fill="#b87333" />
                 </svg>
               </div>
-              <span class="text-xs md:text-sm">Cable LMR 200/400/600</span>
+              <span
+                class="text-[10px] sm:text-xs md:text-sm leading-tight text-center break-words w-full"
+                >Cable LMR 200/400/600</span
+              >
             </a>
           </li>
 
-          <li>
+          <li class="shrink-0">
             <a
               href="https://www.ds3comunicaciones.com/ubiquiti/unifi/precios_powerbeam.html"
               target="_blank"
-              class="menu-item flex flex-col items-center hover:bg-gray-100 p-3 rounded-md cursor-pointer ease duration-200 w-24 md:w-32 shrink-0"
+              class="menu-item flex flex-col items-center hover:bg-gray-100 rounded-md cursor-pointer ease duration-200"
             >
-              <div class="h-12 flex items-center justify-center">
+              <div class="flex items-center justify-center">
                 <svg
                   width="100"
                   height="100"
@@ -215,16 +195,19 @@
                   <circle cx="50" y="15" r="3" fill="#ffd700" />
                 </svg>
               </div>
-              <span class="text-xs md:text-sm">Conectores</span>
+              <span
+                class="text-[10px] sm:text-xs md:text-sm leading-tight text-center break-words w-full"
+                >Conectores</span
+              >
             </a>
           </li>
-          <li>
+          <li class="shrink-0">
             <a
               href="https://www.ds3comunicaciones.com/ubiquiti/unifi/precios_powerbeam.html"
               target="_blank"
-              class="menu-item flex flex-col items-center hover:bg-gray-100 p-3 rounded-md cursor-pointer ease duration-200 w-24 md:w-32 shrink-0"
+              class="menu-item flex flex-col items-center hover:bg-gray-100 rounded-md cursor-pointer ease duration-200"
             >
-              <div class="h-12 flex items-center justify-center">
+              <div class="flex items-center justify-center">
                 <svg
                   width="100"
                   height="120"
@@ -289,7 +272,10 @@
                 </svg>
               </div>
 
-              <span class="text-xs md:text-sm">Accesorios</span>
+              <span
+                class="text-[10px] sm:text-xs md:text-sm leading-tight text-center break-words w-full"
+                >Accesorios</span
+              >
             </a>
           </li>
         </ul>
